@@ -12,6 +12,7 @@
     "devDependencies": {
         "@types/fs-extra": "^11.0.4",
         "@types/node": "^20.11.17",
+        "dotenv": "^16.4.5",
         "fs-extra": "^11.2.0",
         "mongoose": "^8.4.1",
         "ts-loader": "^9.5.1",

@@ -5,7 +5,8 @@ import db from "./routes/dbRouters";
 import { user } from "./controllers";
 import { errorHandler, notFound } from "./middlewares";
 import { serveStatic } from "@hono/node-server/serve-static";
-
+import * as dotenv from "dotenv";
+dotenv.config();
 const app = new Hono();
 connectDB();
 app.use("/static/*", serveStatic({ root: "./" }));
