@@ -3,6 +3,8 @@ services:
   douban-docker:
     build: .
     container_name: douban-docker
+    volumes:
+      - assets:/app/static
     depends_on:
       - mongo
     ports:
@@ -19,6 +21,11 @@ services:
       - database:/data/db
     ports:
       - "27017:27017"
+    healthcheck:
+      test: echo 'db.stats().ok' | mongo localhost:27017/test --quiet
+      interval: 10s
+      timeout: 10s
+      retries: 10
 
 volumes:
   assets:
