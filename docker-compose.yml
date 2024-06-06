@@ -37,9 +37,7 @@ services:
 volumes:
   assets:
     driver: local
-    name: assets
   database:
     driver: local
-    name: mongodb_data
 networks:
   shared-network:
