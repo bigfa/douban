@@ -5,6 +5,8 @@ services:
     container_name: douban-docker
     volumes:
       - assets:/app/static
+    environment:
+      MONGO_URI: mongodb://mongo:27017/fatesinger
     depends_on:
       - mongo
     ports:
@@ -21,17 +23,9 @@ services:
       - database:/data/db
       - ./mongo-init.sh:/docker-entrypoint-initdb.d/mongo-init.sh
 
-    environment:
-      DB_NAME: $DB_NAME
-      DB_USER: $DB_USER
-      DB_PASSWORD: $DB_PASSWORD
     ports:
       - "27017:27017"
-    healthcheck:
-      test: echo 'db.stats().ok' | mongo localhost:27017/test --quiet
-      interval: 10s
-      timeout: 10s
-      retries: 10
+
 
 volumes:
   assets:

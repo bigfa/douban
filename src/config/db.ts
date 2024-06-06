@@ -5,7 +5,7 @@ const connectDB = async () => {
     try {
         // if (process.env.MONGO_URI !== undefined) {
         const conn = await mongoose.connect(
-            "mongodb://localhost:27017/fatesinger",
+            "mongodb://mongo:27017/fatesinger",
             {
                 autoIndex: true,
             }
