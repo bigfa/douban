@@ -1,12 +1,14 @@
 import { serve } from "@hono/node-server";
 import { Hono } from "hono";
 import connectDB from "./config/db";
-//import { Users } from "./routes";
+import db from "./routes/dbRouters";
 import { user } from "./controllers";
 import { errorHandler, notFound } from "./middlewares";
+import { serveStatic } from "@hono/node-server/serve-static";
 
 const app = new Hono();
 connectDB();
+app.use("/static/*", serveStatic({ root: "./" }));
 
 app.get("/", (c) => {
     return c.text("Hello Hono!");
@@ -15,7 +17,8 @@ app.get("/", (c) => {
 app.get("/users", (c) => user.getUsers(c));
 app.get("/create", (c) => user.createUser(c));
 
-//app.route("/users", Users);
+app.route("/", db);
+
 // Error Handler
 app.onError((err, c) => {
     const error = errorHandler(c);

@@ -3,7 +3,6 @@ import * as mongoose from "mongoose";
 const connectDB = async () => {
     console.log("Connecting to MongoDB...");
     try {
-        console.log(process.env);
         // if (process.env.MONGO_URI !== undefined) {
         const conn = await mongoose.connect(
             "mongodb://localhost:27017/fatesinger",
