@@ -1,14 +1,24 @@
 {
-  "scripts": {
-    "dev": "tsx watch src/index.ts"
-  },
-  "dependencies": {
-    "@hono/node-server": "^1.11.2",
-    "hono": "^4.4.2"
-  },
-  "devDependencies": {
-    "@types/node": "^20.11.17",
-    "mongoose": "^8.4.1",
-    "tsx": "^4.7.1"
-  }
+    "main": "dist/index.js",
+    "scripts": {
+        "dev": "tsx watch src/index.ts",
+        "build": "tsup",
+        "start": "node ./dist/index.js"
+    },
+    "dependencies": {
+        "@hono/node-server": "^1.11.2",
+        "hono": "^4.4.2"
+    },
+    "devDependencies": {
+        "@types/node": "^20.11.17",
+        "mongoose": "^8.4.1",
+        "tsx": "^4.7.1",
+        "tsup": "^8.0.1",
+        "typescript": "^5.3.2",
+        "ts-loader": "^9.5.1"
+    },
+    "optionalDependencies": {
+        "@rollup/rollup-linux-arm64-gnu": "^4.6.1",
+        "@rollup/rollup-linux-x64-gnu": "^4.6.1"
+    }
 }
