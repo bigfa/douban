@@ -1,0 +1,31 @@
+version: '3'
+services:
+  douban-docker:
+    build: .
+    container_name: douban-docker
+    depends_on:
+      - mongo
+    ports:
+      - 8000:3000
+    networks:
+      - shared-network
+
+  mongo:
+    image: mongo:4.4.29
+    container_name: mongo
+    restart: "always"
+    volumes:
+      # Persist mongodb data
+      - database:/data/db
+    ports:
+      - "27017:27017"
+
+volumes:
+  assets:
+    driver: local
+    name: assets
+  database:
+    driver: local
+    name: mongodb_data
+networks:
+  shared-network:

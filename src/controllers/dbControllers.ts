@@ -4,6 +4,8 @@ import { dbRequest } from "../utils";
 import { fetchDoubanObject, fetchDoubanObjects } from "../api";
 import { ObjectTypes, ObjectStatus } from "../types";
 import fs from "fs";
+import { resolve } from "path";
+import { mkdirpSync, pathExistsSync } from "fs-extra";
 
 export const getObjects = async (c: Context) => {
     const type: ObjectTypes = (c.req.query("type") as ObjectTypes) || "movie";
@@ -11,12 +13,18 @@ export const getObjects = async (c: Context) => {
     const status: ObjectStatus =
         (c.req.query("status") as ObjectStatus) || "done";
     console.log(status);
-    //@ts-ignore
-    const objects = await User.find();
+    // find by type and paged
+    const objects = await DoubanSubject.find({
+        type: type,
+        status: status,
+    })
+        .sort({ douban_score: -1 })
+        .skip((paged - 1) * 20)
+        .limit(20);
 
-    console.log(objects.results);
+    console.log(objects);
 
-    const results = objects.results.map((movie: any) => {
+    const results = objects.map((movie: any) => {
         movie.poster = movie.poster
             ? `${c.env.R2DOMAIN}/${type}/${movie.subject_id}.jpg`
             : `${c.env.WOKRERDOMAIN}/${type}/${movie.subject_id}.jpg`;
@@ -111,18 +119,24 @@ export const fetchDBPoster = async (c: Context) => {
         return c.text("ID not found");
     }
 
+    const ROOT_PATH = process.cwd();
+
+    const STATIC_DIR: string = resolve(ROOT_PATH, "static");
+
+    const staticDir = `${STATIC_DIR}/${type}`;
+
     // make folder if not exist
 
-    if (!fs.existsSync("./static/" + type)) {
-        fs.mkdirSync("./static/" + type);
+    if (!pathExistsSync(staticDir)) {
+        mkdirpSync(staticDir);
     }
 
-    const key = type + "/" + id + ".jpg";
+    const key = "/" + id + ".jpg";
 
     // get file from ./static if not fold create one
     let object: any = null;
     try {
-        object = fs.readFileSync(`./static/${key}`);
+        object = fs.readFileSync(`${staticDir}/${key}`);
 
         // return stream object
 
@@ -168,9 +182,9 @@ export const fetchDBPoster = async (c: Context) => {
         );
 
         const buffer = await res.arrayBuffer();
-        fs.writeFileSync(`./static/${key}`, Buffer.from(buffer));
+        fs.writeFileSync(`${staticDir}/${key}`, Buffer.from(buffer));
 
-        object = fs.readFileSync(`./static/${key}`);
+        object = fs.readFileSync(`${staticDir}/${key}`);
 
         return new Response(Buffer.from(object), {
             headers: {

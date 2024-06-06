@@ -10,12 +10,14 @@
         "hono": "^4.4.2"
     },
     "devDependencies": {
+        "@types/fs-extra": "^11.0.4",
         "@types/node": "^20.11.17",
+        "fs-extra": "^11.2.0",
         "mongoose": "^8.4.1",
-        "tsx": "^4.7.1",
+        "ts-loader": "^9.5.1",
         "tsup": "^8.0.1",
-        "typescript": "^5.3.2",
-        "ts-loader": "^9.5.1"
+        "tsx": "^4.7.1",
+        "typescript": "^5.3.2"
     },
     "optionalDependencies": {
         "@rollup/rollup-linux-arm64-gnu": "^4.6.1",

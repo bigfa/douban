@@ -9,6 +9,10 @@ COPY package*json tsconfig.json tsup.config.ts ./
 
 COPY src/ src/
 
+## make directory for node_modules
+
+RUN mkdir -p /app/static
+
 RUN npm ci && \
     npm run build
 
