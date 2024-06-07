@@ -25,7 +25,7 @@ const doubanSchema = new Schema<IDoubanSubject>(
         type: { type: String, required: true },
         poster: { type: String, required: false },
         pubdate: { type: String, required: false },
-        year: { type: String, required: true },
+        year: { type: String, required: false },
         status: { type: String, required: false },
     },
     {
