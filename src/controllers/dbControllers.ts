@@ -77,7 +77,7 @@ export const getObjects = async (c: Context) => {
         object.poster = `${process.env.DOMAIN}static/${type}/${object.subject_id}.jpg`;
     }
 
-    return c.json({ objects });
+    return c.json({ results: objects });
 };
 
 export const fetchDBPoster = async (c: Context) => {
