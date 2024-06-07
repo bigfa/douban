@@ -26,8 +26,8 @@ export const getObjects = async (c: Context) => {
 
     const results = objects.map((movie: any) => {
         movie.poster = movie.poster
-            ? `${c.env.R2DOMAIN}/${type}/${movie.subject_id}.jpg`
-            : `${c.env.WOKRERDOMAIN}/${type}/${movie.subject_id}.jpg`;
+            ? `${process.env.DOMAIN}/static/${type}/${movie.subject_id}.jpg`
+            : `${process.env.DOMAIN}/${type}/${movie.subject_id}.jpg`;
         return movie;
     });
 
@@ -104,7 +104,7 @@ export const fetchDBPoster = async (c: Context) => {
 
         await DoubanSubject.updateOne(
             { subject_id: id, type: type },
-            { poster: `${c.env.WOKRERDOMAIN}/${type}/${id}.jpg` }
+            { poster: `/${type}/${id}.jpg` }
         );
 
         const buffer = await res.arrayBuffer();
