@@ -18,7 +18,7 @@ export const getObjects = async (c: Context) => {
         type: type,
         status: status,
     })
-        .sort({ douban_score: -1 })
+        .sort({ create_time: -1 })
         .skip((paged - 1) * 20)
         .limit(20);
 
