@@ -7,6 +7,7 @@ services:
       - assets:/app/static
     environment:
       MONGO_URI: mongodb://mongo:27017/fatesinger
+      DBID: 54529369
     depends_on:
       - mongo
     ports:
