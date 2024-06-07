@@ -7,6 +7,36 @@ import fs from "fs";
 import { resolve } from "path";
 import { mkdirpSync, pathExistsSync } from "fs-extra";
 
+const downloadCover = async (
+    staticDir: string,
+    key: string,
+    poster: string
+) => {
+    try {
+        const obj = fs.readFileSync(`${staticDir}/${key}`);
+        if (!obj) {
+            const res = await dbRequest(poster);
+            if (res.status === 522) {
+                return "Error 522";
+            }
+
+            const buffer = await res.arrayBuffer();
+            fs.writeFileSync(`${staticDir}/${key}`, Buffer.from(buffer));
+            console.log("file not exist");
+        } else {
+            console.log("file exist");
+        }
+    } catch (e) {
+        const res = await dbRequest(poster);
+        if (res.status === 522) {
+            return "Error 522";
+        }
+
+        const buffer = await res.arrayBuffer();
+        fs.writeFileSync(`${staticDir}/${key}`, Buffer.from(buffer));
+    }
+};
+
 export const getObjects = async (c: Context) => {
     const type: ObjectTypes = (c.req.query("type") as ObjectTypes) || "movie";
     const paged: number = parseInt(c.req.query("paged") || "1");
@@ -22,16 +52,32 @@ export const getObjects = async (c: Context) => {
         .skip((paged - 1) * 20)
         .limit(20);
 
-    console.log(objects);
+    const ROOT_PATH = process.cwd();
 
-    const results = objects.map((movie: any) => {
-        movie.poster = movie.poster
-            ? `${process.env.DOMAIN}/static/${type}/${movie.subject_id}.jpg`
-            : `${process.env.DOMAIN}/${type}/${movie.subject_id}.jpg`;
-        return movie;
-    });
+    const STATIC_DIR: string = resolve(ROOT_PATH, "static");
 
-    return c.json({ results });
+    const staticDir = `${STATIC_DIR}/${type}`;
+
+    // make folder if not exist
+
+    if (!pathExistsSync(staticDir)) {
+        mkdirpSync(staticDir);
+    }
+
+    // download all cover
+
+    for (let object of objects) {
+        const key = "/" + object.subject_id + ".jpg";
+        await downloadCover(staticDir, key, object.poster);
+    }
+
+    // update poster url to local cover
+
+    for (let object of objects) {
+        object.poster = `${process.env.DOMAIN}static/${type}/${object.subject_id}.jpg`;
+    }
+
+    return c.json({ objects });
 };
 
 export const fetchDBPoster = async (c: Context) => {

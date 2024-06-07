@@ -69,7 +69,7 @@ export const sync = async (c: Context) => {
                                     douban_score: interet.subject.rating.value,
                                     link: interet.subject.url,
                                     type: type,
-                                    poster: "",
+                                    poster: interet.subject.pic.large,
                                     pubdate: interet.subject.pubdate
                                         ? interet.subject.pubdate[0]
                                         : "",
