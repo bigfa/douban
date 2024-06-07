@@ -6,7 +6,7 @@ services:
     volumes:
       - assets:/app/static
     environment:
-      MONGO_URI: mongodb://root:root@mongo:27017/fatesinger
+      MONGO_URI: mongodb://mongo:27017/fatesinger
     depends_on:
       - mongo
     ports:
@@ -37,9 +37,7 @@ services:
 volumes:
   assets:
     driver: local
-    name: assets
   database:
     driver: local
-    name: mongodb_data
 networks:
   shared-network:
