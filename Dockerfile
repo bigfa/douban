@@ -5,10 +5,9 @@ FROM base AS builder
 RUN apk add --no-cache libc6-compat
 WORKDIR /app
 
-COPY package*json tsconfig.json tsup.config.ts .mongooserc.js .env ./
+COPY package*json tsconfig.json tsup.config.ts .env ./
 
 COPY src/ src/
-COPY mongoose/ ./mongoose
 
 ## make directory for node_modules
 
@@ -27,7 +26,6 @@ COPY --from=builder --chown=hono:nodejs /app/node_modules /app/node_modules
 COPY --from=builder --chown=hono:nodejs /app/dist /app/dist
 COPY --from=builder --chown=hono:nodejs /app/package.json /app/package.json
 COPY --from=builder --chown=hono:nodejs /app/tsup.config.ts /app/tsup.config.ts
-COPY --from=builder --chown=hono:nodejs /app/.mongooserc.js /app/.mongooserc.js
 COPY --from=builder --chown=hono:nodejs /app/.env /app/.env
 COPY --from=builder --chown=hono:nodejs /app/static /app/static
 

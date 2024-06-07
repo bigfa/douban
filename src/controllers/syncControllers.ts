@@ -21,7 +21,7 @@ export const sync = async (c: Context) => {
                 i: number = 0;
             while (confition) {
                 const res: any = await fetchDoubanObjects(
-                    54529369,
+                    process.env.DBID,
                     type,
                     status,
                     i
