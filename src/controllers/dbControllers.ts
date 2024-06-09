@@ -6,6 +6,7 @@ import { ObjectTypes, ObjectStatus } from "../types";
 import fs from "fs";
 import { resolve } from "path";
 import { mkdirpSync, pathExistsSync } from "fs-extra";
+import { DOMAIN } from "../enviroments";
 
 const downloadCover = async (
     staticDir: string,
@@ -74,7 +75,7 @@ export const getObjects = async (c: Context) => {
     // update poster url to local cover
 
     for (let object of objects) {
-        object.poster = `${process.env.DOMAIN}static/${type}/${object.subject_id}.jpg`;
+        object.poster = `${DOMAIN}/static/${type}/${object.subject_id}.jpg`;
     }
 
     return c.json({ results: objects });
@@ -200,14 +201,14 @@ export const fetchDBObject = async (c: Context) => {
             return c.text("Not found");
         }
 
-        object.poster = `${c.env.WOKRERDOMAIN}/${type}/${id}.jpg`;
+        object.poster = `${DOMAIN}/${type}/${id}.jpg`;
 
         return c.json(object);
     } else {
         if (!object.poster) {
-            object.poster = `${c.env.WOKRERDOMAIN}/${type}/${id}.jpg`;
+            object.poster = `${DOMAIN}/${type}/${id}.jpg`;
         } else {
-            object.poster = `${c.env.R2DOMAIN}/${object.poster}`;
+            object.poster = `${DOMAIN}/${object.poster}`;
         }
         return c.json(object);
     }

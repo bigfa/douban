@@ -2,6 +2,7 @@ import { DoubanSubject } from "../models";
 import { fetchDoubanObjects } from "../api";
 import { Context } from "hono";
 import { ObjectTypes, ObjectStatus } from "../types";
+import { DBID } from "../enviroments";
 
 export const sync = async (c: Context) => {
     const TYPES: string = c.req.query("types") || "movie";
@@ -21,7 +22,7 @@ export const sync = async (c: Context) => {
                 i: number = 0;
             while (confition) {
                 const res: any = await fetchDoubanObjects(
-                    process.env.DBID,
+                    DBID,
                     type,
                     status,
                     i
