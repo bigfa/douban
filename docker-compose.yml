@@ -8,10 +8,11 @@ services:
     environment:
       MONGO_URI: mongodb://mongo:27017/fatesinger
       DBID: 54529369
+      DOMAIN: https://node.wpista.com
     depends_on:
       - mongo
     ports:
-      - 8000:3000
+      - 3000:3000
     networks:
       - shared-network
 
