@@ -1,1 +1,1 @@
-export * as Douban from "./dbRouters";
+export * as dbRouter from "./dbRouters";

@@ -1,10 +1,12 @@
 import { serve } from "@hono/node-server";
 import { Hono } from "hono";
 import connectDB from "./config/db";
-import db from "./routes/dbRouters";
+import dbRouter from "./routes/dbRouters";
 import { errorHandler, notFound } from "./middlewares";
 import { serveStatic } from "@hono/node-server/serve-static";
+import { PORT } from "./enviroments";
 import * as dotenv from "dotenv";
+
 dotenv.config();
 const app = new Hono();
 connectDB();
@@ -14,7 +16,7 @@ app.get("/", (c) => {
     return c.text("Hello Hono!");
 });
 
-app.route("/", db);
+app.route("/api", dbRouter);
 
 // Error Handler
 app.onError((err, c) => {
@@ -27,10 +29,10 @@ app.notFound((c) => {
     const error = notFound(c);
     return error;
 });
-const port = 3000;
-console.log(`Server is runnings on port ${port}`);
+
+console.log(`Server is runnings on port ${PORT}`);
 
 serve({
     fetch: app.fetch,
-    port,
+    port: PORT,
 });
