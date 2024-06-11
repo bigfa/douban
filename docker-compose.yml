@@ -1,12 +1,12 @@
 version: '3'
 services:
   douban-docker:
-    build: .
+    image: fatesinger/douban:latest
     container_name: douban-docker
     volumes:
       - assets:/app/static
     environment:
-      MONGO_URI: mongodb://mongo:27017/fatesinger
+      MONGO_URI: mongodb://mongo:27017/douban
       DBID: 54529369
       DOMAIN: https://node.wpista.com
     depends_on:
@@ -23,7 +23,6 @@ services:
     volumes:
       # Persist mongodb data
       - database:/data/db
-      - ./mongo-init.sh:/docker-entrypoint-initdb.d/mongo-init.sh
 
     ports:
       - "27017:27017"

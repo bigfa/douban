@@ -2,9 +2,8 @@ name: build_docker
 
 on:
     push:
-        branches: [master]
-    release:
-        types: [created] # 表示在创建新的 Release 时触发
+        tags:
+            - "v*" # Push events to matching v*, i.e. v1.0, v20.15.10
 
 jobs:
     build_docker:
