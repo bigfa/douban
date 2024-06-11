@@ -18,9 +18,9 @@ const doubanSchema = new Schema<IDoubanSubject>(
     {
         subject_id: { type: String, required: true },
         name: { type: String, required: true },
-        card_subtitle: { type: String, required: true },
+        card_subtitle: { type: String, required: false },
         create_time: { type: Date, required: false },
-        douban_score: { type: String, required: true },
+        douban_score: { type: String, required: false },
         link: { type: String, required: true },
         type: { type: String, required: true },
         poster: { type: String, required: false },

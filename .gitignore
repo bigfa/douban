@@ -16,6 +16,7 @@ dist
 # env
 .env
 .env.production
+.env.local
 
 # logs
 logs/

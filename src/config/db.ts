@@ -3,7 +3,7 @@ import { MONGO_URI } from "../enviroments";
 const connectDB = async () => {
     console.log("Connecting to MongoDB...");
     try {
-        console.log(process.env.MONGO_URI);
+        console.log(MONGO_URI);
         // if (process.env.MONGO_URI !== undefined) {
         const conn = await mongoose.connect(MONGO_URI as string, {
             autoIndex: true,
