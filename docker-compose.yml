@@ -1,0 +1,44 @@
+version: '3'
+services:
+  douban-docker:
+    image: fatesinger/douban:latest
+    container_name: douban-docker
+    volumes:
+      - assets:/app/static
+    environment:
+      MONGO_URI: mongodb://mongo:27017/douban
+      DBID: 54529369
+      DOMAIN: https://node.wpista.com
+      API_BASE: /
+    depends_on:
+      - mongo
+    ports:
+      - 8000:3000
+    networks:
+      - shared-network
+
+  mongo:
+    image: mongo:4.4.29
+    container_name: mongo
+    restart: "always"
+    volumes:
+      # Persist mongodb data
+      - database:/data/db
+
+    ports:
+      - "27017:27017"
+
+    networks:
+      - shared-network
+
+volumes:
+  assets:
+    driver: local
+    name: assets
+
+  database:
+    driver: local
+    name: mongodb_data
+    
+networks:
+  shared-network:
