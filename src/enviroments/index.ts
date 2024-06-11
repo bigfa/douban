@@ -5,6 +5,6 @@ export const DB_NAME: string = process.env.DB_NAME || "douban";
 export const DOMAIN: string = process.env.DOMAIN || "http://localhost:3000";
 
 export const MONGO_URI: string =
-    process.env.MONGO_URI || "mongodb://localhost:27017";
+    process.env.MONGO_URI || "mongodb://localhost:27017/douban";
 
 export const PORT: number = parseInt(process.env.PORT || "3000");
