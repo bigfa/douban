@@ -101,3 +101,14 @@ MONGO_URI
 DBID 你的豆瓣 ID
 
 DOMAIN 绑定的域名
+
+## 本地开发
+
+根据`.env.example`创建`.env`文件
+
+```
+npm install
+npm run dev
+```
+
+> 需要本地有 mongodb 服务
