@@ -5,7 +5,7 @@ FROM base AS builder
 RUN apk add --no-cache libc6-compat
 WORKDIR /app
 
-COPY package*json tsconfig.json tsup.config.ts .env ./
+COPY package*json tsconfig.json tsup.config.ts ./
 
 COPY src/ src/
 
