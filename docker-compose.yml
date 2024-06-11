@@ -9,6 +9,7 @@ services:
       MONGO_URI: mongodb://mongo:27017/douban
       DBID: 54529369
       DOMAIN: https://node.wpista.com
+      API_BASE: /
     depends_on:
       - mongo
     ports:

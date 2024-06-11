@@ -4,7 +4,7 @@ import connectDB from "./config/db";
 import dbRouter from "./routes/dbRouters";
 import { errorHandler, notFound } from "./middlewares";
 import { serveStatic } from "@hono/node-server/serve-static";
-import { PORT } from "./enviroments";
+import { PORT, API_BASE } from "./enviroments";
 
 const app = new Hono();
 connectDB();
@@ -14,7 +14,7 @@ app.get("/", (c) => {
     return c.text("Hello Hono!");
 });
 
-app.route("/api", dbRouter);
+app.route(API_BASE, dbRouter);
 
 // Error Handler
 app.onError((err, c) => {
