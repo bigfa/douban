@@ -1,22 +1,22 @@
 import { Context } from "hono";
 import { ObjectTypes, ObjectStatus } from "../types";
-import { syncSevices } from "../services";
+import { syncServices } from "../services";
 
 export const sync = async (c: Context) => {
-    const TYPES: string = c.req.query("types") || "movie,book,music,game,drama";
-    const STATUSES: string = c.req.query("statuses") || "done,mark,doing";
+    const TYPES = c.req.query("types") || "movie,book,music,game,drama";
+    const STATUSES = c.req.query("statuses") || "done,mark,doing";
 
-    const typeList: Array<ObjectTypes> = TYPES.split(",").map(
-        (status: string) => status as ObjectTypes
+    const typeList: ObjectTypes[] = TYPES.split(",").map(
+        (item: string) => item as ObjectTypes
     );
 
-    const statusList: Array<ObjectStatus> = STATUSES.split(",").map(
-        (status: string) => status as ObjectStatus
+    const statusList: ObjectStatus[] = STATUSES.split(",").map(
+        (item: string) => item as ObjectStatus
     );
 
-    for (let type of typeList) {
-        for (let status of statusList) {
-            await syncSevices(c, type, status);
+    for (const type of typeList) {
+        for (const status of statusList) {
+            await syncServices(c, type, status);
         }
     }
 

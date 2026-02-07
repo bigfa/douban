@@ -1,13 +1,11 @@
 import { Context } from "hono";
 
 // Error Handler
-export const errorHandler = (c: Context) => {
-    console.log(c.res.status);
-
+export const errorHandler = (c: Context, error: Error) => {
     return c.json({
         success: false,
-        message: c.error?.message,
-        stack: process.env.NODE_ENV === "production" ? null : c.error?.stack,
+        message: error.message,
+        stack: process.env.NODE_ENV === "production" ? null : error.stack,
     });
 };
 

@@ -1,1 +1,1 @@
-export * from "./doubanModels";
+export * from "./doubanModel";

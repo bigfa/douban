@@ -123,7 +123,9 @@ npm run dev
 
 ### 接口
 
-对外提供了 3 个接口，标记条目列表、单个条目信息、本地化条目封面。
+对外提供了 4 个接口，标记条目列表、单个条目信息、本地化条目封面和同步接口。
+
+完整 API 文档（中文）：[`docs/api.md`](./docs/api.md)
 
 1. 条目列表`/api/list`，支持两个参数 type 和 paged,type 为条目类型，status 为状态类型，paged 为页码，get 请求。
 2. 单个条目为`/api/:type/:id`,`type` 为类型，`id` 为条目 `id`。

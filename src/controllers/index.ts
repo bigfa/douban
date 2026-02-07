@@ -1,3 +1,3 @@
-export * as douban from "./dbControllers";
+export * as douban from "./doubanControllers";
 
 export * as doubanSync from "./syncControllers";

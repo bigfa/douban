@@ -1,1 +1,1 @@
-export * as dbRouter from "./dbRouters";
+export { default as doubanRouter } from "./doubanRouter";

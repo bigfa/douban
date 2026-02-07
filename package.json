@@ -3,26 +3,31 @@
     "scripts": {
         "dev": "tsx watch src/index.ts",
         "build": "tsup",
-        "start": "node ./dist/index.js"
+        "start": "node ./dist/index.js",
+        "test": "vitest",
+        "test:run": "vitest run",
+        "test:coverage": "vitest run --coverage"
     },
     "dependencies": {
-        "@hono/node-server": "^1.11.2",
-        "hono": "^4.4.2"
+        "@hono/node-server": "^1.19.9",
+        "dotenv": "^17.2.4",
+        "fs-extra": "^11.3.3",
+        "hono": "^4.11.8",
+        "mongoose": "^9.1.6"
     },
     "devDependencies": {
         "@types/fs-extra": "^11.0.4",
-        "@types/node": "^20.11.17",
-        "dotenv": "^16.4.5",
-        "fs-extra": "^11.2.0",
-        "mongoose": "^8.4.1",
-        "ts-loader": "^9.5.1",
+        "@types/node": "^25.2.1",
+        "@vitest/coverage-v8": "^4.0.18",
+        "ts-loader": "^9.5.4",
         "ts-node": "^10.9.2",
-        "tsup": "^8.0.1",
-        "tsx": "^4.7.1",
-        "typescript": "^5.3.2"
+        "tsup": "^8.5.1",
+        "tsx": "^4.21.0",
+        "typescript": "^5.9.3",
+        "vitest": "^4.0.18"
     },
     "optionalDependencies": {
-        "@rollup/rollup-linux-arm64-gnu": "^4.6.1",
-        "@rollup/rollup-linux-x64-gnu": "^4.6.1"
+        "@rollup/rollup-linux-arm64-gnu": "^4.57.1",
+        "@rollup/rollup-linux-x64-gnu": "^4.57.1"
     }
 }

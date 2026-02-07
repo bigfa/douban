@@ -1,20 +1,20 @@
-import { Document, Schema, model } from "mongoose";
+import { Model, model, models, Schema } from "mongoose";
 
-interface IDoubanSubject {
+export interface DoubanSubjectRecord {
     subject_id: string;
     name: string;
     card_subtitle: string;
-    create_time: any;
+    create_time: Date | null;
     douban_score: string;
     link: string;
     type: string;
     poster: string;
     pubdate: string;
     year: string;
-    status: string;
+    status: string | null;
 }
 
-const doubanSchema = new Schema<IDoubanSubject>(
+const doubanSchema = new Schema<DoubanSubjectRecord>(
     {
         subject_id: { type: String, required: true },
         name: { type: String, required: true },
@@ -33,4 +33,6 @@ const doubanSchema = new Schema<IDoubanSubject>(
     }
 );
 
-export const DoubanSubject = model("DoubanSubject", doubanSchema);
+export const DoubanSubject: Model<DoubanSubjectRecord> =
+    (models.DoubanSubject as Model<DoubanSubjectRecord>) ||
+    model<DoubanSubjectRecord>("DoubanSubject", doubanSchema);
